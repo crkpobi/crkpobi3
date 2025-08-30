@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Ghana Code Club Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f5f5f5;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, #ffbe0b, #fb5607);
+      color: white;
+      text-align: center;
+      padding: 60px 0 30px;
+    }
+
+    .profile-container {
+      margin-bottom: 20px;
+    }
+
+    .profile-image {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 5px solid white;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: transform 0.3s;
+      object-fit: cover;
+    }
+
+    .profile-image:hover {
+      transform: scale(1.05);
+    }
+
+    .profile-name {
+      margin-top: 20px;
+      font-size: 2.5rem;
+      font-weight: bold;
+      animation: fadeInDown 1s ease;
+    }
+
+    .profile-bio {
+      margin: 15px auto 0;
+      max-width: 600px;
+      font-size: 1.1rem;
+      animation: fadeIn 1s ease 0.3s both;
+    }
+
+    /* Skills Section */
+    .skills {
+      padding: 40px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: #fb5607;
+    }
+
+    .skills-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .skill-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      width: 300px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: fadeInUp 0.8s ease both;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+
+    .skill-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .skill-content {
+      padding: 20px;
+    }
+
+    .skill-content h3 {
+      color: #ff006e;
+      margin-bottom: 10px;
+    }
+
+    .skill-progress {
+      height: 8px;
+      background-color: #eee;
+      border-radius: 4px;
+      margin-top: 15px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 1.5s ease-in-out;
+    }
+
+    .scratch-bar {
+      background: linear-gradient(to right, #ffbe0b, #fb5607);
+      width: 0;
+    }
+
+    .robotics-bar {
+      background: linear-gradient(to right, #ff006e, #8338ec);
+      width: 0;
+    }
+
+    .web-bar {
+      background: linear-gradient(to right, #3a86ff, #00a6fb);
+      width: 0;
+    }
+
+    /* Thank you section */
+    .thank-you {
+      background: linear-gradient(135deg, #8338ec, #3a86ff);
+      color: white;
+      padding: 40px 0;
+      text-align: center;
+    }
+
+    .thank-you-content {
+      max-width: 800px;
+      margin: 0 auto;
+      animation: fadeIn 1s ease;
+    }
+
+    .thank-you h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .thank-you p {
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+    }
+
+    .founders {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .founder {
+      text-align: center;
+    }
+
+    .founder img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid white;
+      object-fit: cover;
+    }
+
+    .founder-name {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .founder-title {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    /* Footer */
+    footer {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 0.9rem;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from { 
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to { 
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInDown {
+      from { 
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to { 
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Edit profile modal */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 500px;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .close-button {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .btn {
+      background: #fb5607;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header with profile -->
+  <header>
+    <div class="container">
+      <div class="profile-container">
+        <img src="images-5.jpeg" alt="Profile Image" class="profile-image" id="profileImage">
+        <h1 class="profile-name" id="profileName">Carl-Russell</h1>
+        <p class="profile-bio" id="profileBio">Ghana Code Club Student | Scratch Coder | Robotics Enthusiast | Web Designer</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Skills Section -->
+  <section class="skills">
+    <div class="container">
+      <h2 class="section-title">My Skills</h2>
+      <div class="skills-container">
+        <!-- Scratch -->
+        <div class="skill-card">
+          <img src="4c7d92f693ff45309c0630298fe2abbc_1.png" alt="Scratch Coding">
+          <div class="skill-content">
+            <h3>Scratch Coding</h3>
+            <p>I've created interactive stories, games, and animations using block-based programming in Scratch.</p>
+            <div class="skill-progress">
+              <div class="progress-bar scratch-bar"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Robotics -->
+        <div class="skill-card">
+          <img src="download (1).jpg" alt="Robotics">
+          <div class="skill-content">
+            <h3>Robotics</h3>
+            <p>I've built and programmed robots using Spike Prime and Revolution robotic kits to solve real-world problems.</p>
+            <div class="skill-progress">
+              <div class="progress-bar robotics-bar"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Web Design -->
+        <div class="skill-card">
+          <img src="images (3).jpg" alt="Web Design">
+          <div class="skill-content">
+            <h3>Web Design</h3>
+            <p>I'm learning to create responsive websites using HTML and CSS to showcase my projects and ideas.</p>
+            <div class="skill-progress">
+              <div class="progress-bar web-bar"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Thank You Section -->
+  <section class="thank-you">
+    <div class="container">
+      <div class="thank-you-content">
+        <h2>Thank You!</h2>
+        <p>I want to express my sincere gratitude to Aunty Tina, the founder of Ghana Code Club, and all the instructors for their guidance and support throughout my coding journey.</p>
+        <p>Their dedication to teaching coding skills to young people in Ghana has opened new doors and possibilities for me and many others.</p>
+        
+        <div class="founders">
+          <div class="founder">
+            <img src="1663557219742.jpg" alt="Aunty Tina">
+            <div class="founder-name">Aunty Tina</div>
+            <div class="founder-title">Founder, Ghana Code Club</div>
+          </div>
+          <div class="founder">
+            <img src="/api/placeholder/200/200" alt="Ghana Code Club Instructors">
+            <div class="founder-name">Instructors</div>
+            <div class="founder-title">Ghana Code Club</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Ghana Code Club Student Portfolio</p>
+    </div>
+  </footer>
+
+  <!-- Edit Profile Modal -->
+  <div class="modal" id="editProfileModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Edit Your Profile</h2>
+        <button class="close-button" id="closeModal">&times;</button>
+      </div>
+      <form id="profileForm">
+        <div class="form-group">
+          <label for="nameInput">Your Name</label>
+          <input type="text" id="nameInput" class="form-control" placeholder="Enter your name">
+        </div>
+        <div class="form-group">
+          <label for="bioInput">Short Bio</label>
+          <textarea id="bioInput" class="form-control" placeholder="Tell us about yourself"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="imageInput">Profile Image URL</label>
+          <input type="text" id="imageInput" class="form-control" placeholder="Enter image URL">
+        </div>
+        <button type="submit" class="btn">Save Changes</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Animate progress bars on load
+    window.addEventListener('load', function() {
+      setTimeout(() => {
+        document.querySelector('.scratch-bar').style.width = '85%';
+        document.querySelector('.robotics-bar').style.width = '75%';
+        document.querySelector('.web-bar').style.width = '60%';
+      }, 500);
+    });
+
+    // Profile image click to open modal
+    document.getElementById('profileImage').addEventListener('click', function() {
+      document.getElementById('editProfileModal').style.display = 'flex';
+    });
+
+    // Close modal
+    document.getElementById('closeModal').addEventListener('click', function() {
+      document.getElementById('editProfileModal').style.display = 'none';
+    });
+
+    // Form submission
+    document.getElementById('profileForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('nameInput').value;
+      const bio = document.getElementById('bioInput').value;
+      const imageUrl = document.getElementById('imageInput').value;
+      
+      if (name) {
+        document.getElementById('profileName').textContent = name;
+      }
+      
+      if (bio) {
+        document.getElementById('profileBio').textContent = bio;
+      }
+      
+      if (imageUrl) {
+        document.getElementById('profileImage').src = imageUrl;
+      }
+      
+      document.getElementById('editProfileModal').style.display = 'none';
+    });
+
+    // Close modal if clicked outside
+    window.addEventListener('click', function(e) {
+      if (e.target === document.getElementById('editProfileModal')) {
+        document.getElementById('editProfileModal').style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
